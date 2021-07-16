@@ -8,12 +8,21 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context-4.0.xsd
     http://www.springframework.org/schema/aop 
-    http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
-    ">
+    http://www.springframework.org/schema/aop/spring-aop-4 .0.xsd">
  
 
     <!-- bean definitions here -->
-<context:component-scan base-package="com.main.tcent"></context:component-scan>
+<!-- <context:component-scan base-package="com.main.tcent"></context:component-scan> -->
+<context:property-placeholder location="classpath:sport.properties"/>
+<bean id="myFortune" class="com.main.coatch.HappyFortuneService"></bean>
+<bean id="cricketcoach" class= "com.main.coatch.CricketCoach">
+<property name="fortuneservice" ref="myFortune"></property>
+<property name="email" value="${foo.email}"></property>
+<property name="team" value="${foo.team}" ></property>
+</bean>
+<bean id="BaseBall" class="com.main.coatch.BaseBall">
+<constructor-arg ref="myFortune"> </constructor-arg>
+</bean>
+<!-- <bean id="vehicle" class="com.main.tcent.bike"></bean> -->
 
-<bean id="vehicle" class="com.main.tcent.bike"></bean>
 </beans>
